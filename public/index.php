@@ -10,7 +10,11 @@ ini_set('html_errors', 0);
 use Zend\Log\Logger as ZendLogger;
 $filter = new Zend\Log\Filter\Priority(ZendLogger::DEBUG);
 $writer = new Zend\Log\Writer\Stream(__DIR__ . '/../logs/zend-log.log');
+// Add formatter to change default timestamp format
+$formatter = new Zend\Log\Formatter\Simple();
+$formatter->setDateTimeFormat('[Y-m-d H:i:s]');
 $writer->addFilter($filter);
+$writer->setFormatter($formatter);
 $zendLogger = new ZendLogger;
 $zendLogger->addWriter($writer);
 
