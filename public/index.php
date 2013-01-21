@@ -1,6 +1,9 @@
 <?php
 
 require_once '../vendor/autoload.php';
+error_reporting(-1);
+ini_set('display_errors', 1);
+ini_set('display_startup_errors', 1);
 ini_set('html_errors', 0);
 
 // Zend logging
@@ -14,6 +17,11 @@ $zendLogger->addWriter($writer);
 // Monolog Logging
 $monolog = new Monolog\Logger('demo');
 $monolog->pushHandler(new Monolog\Handler\StreamHandler(__DIR__ . '/../logs/monolog.log', Monolog\Logger::DEBUG));
+// Requires FirePHP FF plugin
+$monolog->pushHandler(new Monolog\Handler\FirePHPHandler, Monolog\Logger::DEBUG);
+// Requires ChromePHP Chrome plugin
+$monolog->pushHandler(new Monolog\Handler\ChromePHPHandler, Monolog\Logger::DEBUG);
+// Adds introspection: file, line, class, and function
 $monolog->pushProcessor(new Monolog\Processor\IntrospectionProcessor);
 
 $app = new \Slim\Slim();
