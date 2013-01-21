@@ -1,4 +1,5 @@
-### Loggin Demo ###
+Logging Demo
+============
 
 Playing around with PHP logging
 
